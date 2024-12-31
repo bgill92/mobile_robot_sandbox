@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<sdf version='1.5'>
+  <!-- The Maze Model -->
+  <model name="maze_model">
+    <!--
+       If your maze is meant to be immovable, set it to static.
+       If you want it to move, change <static> to false.
+    -->
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+
+    <link name="maze_link">
+      <!-- Collision element for physics interaction -->
+      <collision name="maze_collision">
+        <geometry>
+          <mesh>
+            <!-- 
+              Update 'file://maze.stl' to the correct path to your STL file.
+              For example, if maze.stl is in the same folder, this should work.
+            -->
+            <uri>model://maze/maze.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+      </collision>
+
+      <!-- Visual element for rendering -->
+      <visual name="maze_visual">
+        <geometry>
+          <mesh>
+            <uri>model://maze/maze.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

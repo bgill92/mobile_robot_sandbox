@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+
+    <!-- Simple environment setup: ground plane and sun light -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <include>
+      <uri>model://maze</uri>
+      <name>maze</name>
+      <static>true</static>
+      <pose>0 0 -0.1s 0 0 0</pose>
+    </include>    
+
+  </world>
+</sdf>

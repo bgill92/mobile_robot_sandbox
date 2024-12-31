@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>mobile_robot_algorithms</name>
+  <version>0.0.0</version>
+  <description>Mobile Robot Algorithms for perception, state estimation, etc</description>
+  <maintainer email="bilal.gill@picknik.ai">bilal</maintainer>
+  <license>MIT License</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <exec_depend>andino_base</exec_depend>
+  <exec_depend>andino_bringup</exec_depend>
+  <exec_depend>andino_control</exec_depend>
+  <exec_depend>andino_description</exec_depend>
+  <exec_depend>andino_gz_classic</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
