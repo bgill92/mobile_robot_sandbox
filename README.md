@@ -11,6 +11,11 @@ Instructions for setting up the Docker container can be found/adapted from [here
 
 To run the Gazebo simulation:
 
+1) Make sure that the `andino` submodule is pulled:
+```bash
+git submodule update --init --recursive
+```
+
 2) In a terminal, run:
 ```bash
 export UID=$(id -u) export GID=$(id -g); docker compose -f compose.dev.yml run development
