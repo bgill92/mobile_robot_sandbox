@@ -51,7 +51,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(pkg_andino_gz_classic, 'launch', 'spawn_robot.launch.py')
         ),
-        launch_arguments=[("initial_pose_x", "-0.3"), ("initial_pose_y", "1.0"), ("initial_pose_yaw", "-1.57079632679")]
+        launch_arguments=[("initial_pose_x", "-0.3"), ("initial_pose_y", "1.0"), ("initial_pose_yaw", "-1.57079632679"), ("use_gazebo_ros_control", "true")]
     )
 
     # Gazebo launch
@@ -75,6 +75,14 @@ def generate_launch_description():
     andino_visualization_timer = TimerAction(
         period=5.0, actions=[rviz], condition=IfCondition(use_rviz)
     )
+
+    right_wall_follow = Node(
+        package="mobile_robot_algorithms",
+        executable="right_wall_follow.py",
+        name="right_wall_follow",
+        output="log",
+    )
+
     return LaunchDescription(
         [
             use_sim_time_argument,
@@ -83,6 +91,7 @@ def generate_launch_description():
             use_rviz_argument,
             gazebo,
             include_andino,
-            andino_visualization_timer,
+            # andino_visualization_timer,
+            # right_wall_follow
         ]
     )

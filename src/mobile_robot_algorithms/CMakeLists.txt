@@ -18,10 +18,10 @@ install(
     share/${PROJECT_NAME}
 )
 
-# install(PROGRAMS
-#   scripts/repub_odometry_joint_states.py
-#   DESTINATION lib/${PROJECT_NAME}
-# )
+install(PROGRAMS
+  scripts/right_wall_follow.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
 endif()
