@@ -28,11 +28,15 @@ services:
     volumes:
       - ~/.ssh:${HOME}/.ssh:ro
       - ~/.gitconfig:${HOME}/.gitconfig:ro
-      - ${PWD}/src:${HOME}/ws/src
+      - ${PWD}/src:${HOME}/ws/src:rw
       - ${PWD}/src/mobile_robot_algorithms/models:${HOME}/.gazebo/models
       - ~/.${REPO}/ccache:${HOME}/.ccache
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
       - /etc/group:/etc/group:ro
       - /etc/passwd:/etc/passwd:ro
       - /etc/shadow:/etc/shadow:ro
+      # Mount volumes to build cache and artifacts
+      - ./.colcon/build:${HOME}/ws/build:rw
+      - ./.colcon/install:${HOME}/ws/install:rw
+      - ./.colcon/log:${HOME}/ws/log:rw
     working_dir: ${HOME}/ws

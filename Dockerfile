@@ -70,14 +70,14 @@ RUN --mount=type=cache,target=/var/cache/apt,id=apt \
         neovim \
         openssh-client \
         socat \
+        tmux \
         vim \
         wget \
     && rm -rf /var/lib/apt/lists/*
 
-# RUN python -m pip install --no-cache-dir \
-#     opencv-python==4.10.0.84 \
-#     pre-commit==3.0.4 \
-#     scipy==1.14.1
+RUN python -m pip install --no-cache-dir \
+     matplotlib \
+     scipy
 
 # Setup user home directory
 # --no-log-init helps with excessively long UIDs
