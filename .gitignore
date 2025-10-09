@@ -1,0 +1,4 @@
+# build and log artifacts
+.colcon/log/*
+.colcon/build/*
+.colcon/install/*
