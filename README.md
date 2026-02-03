@@ -87,7 +87,25 @@ Enter the pixi shell for interactive development:
 pixi shell
 ```
 
-Once in the shell, you can run any ROS2 commands directly without the `pixi run` prefix.
+Once in the shell, source the workspace to use ROS2 packages:
+
+**For bash users:**
+```bash
+source install/setup.bash
+```
+
+**For zsh users:**
+```zsh
+source install/setup.zsh
+```
+
+Alternatively, use the pixi tasks that handle sourcing automatically:
+```bash
+pixi run source      # Opens bash with workspace sourced
+pixi run source-zsh  # Opens zsh with workspace sourced
+```
+
+After sourcing, you can run any ROS2 commands directly without the `pixi run` prefix.
 
 ## Migrating from Docker
 

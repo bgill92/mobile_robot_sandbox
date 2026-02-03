@@ -17,8 +17,11 @@ clean = "rm -rf build install log"
 # Launch the robot in maze simulation
 sim = "bash -c 'source install/setup.bash && ros2 launch mobile_robot_algorithms robot_in_maze.launch.py'"
 
-# Source workspace for interactive use
+# Source workspace for interactive use (bash)
 source = "bash -c 'source install/setup.bash && exec bash'"
+
+# Source workspace for interactive use (zsh)
+source-zsh = "zsh -c 'source install/setup.zsh && exec zsh'"
 
 [dependencies]
 # ROS2 Humble - using desktop for complete installation
