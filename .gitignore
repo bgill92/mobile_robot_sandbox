@@ -4,3 +4,7 @@
 .colcon/install/*
 src/mobile_robot_algorithms/scripts/rosbag2_*
 src/mobile_robot_algorithms/scripts/__pycache__
+
+# pixi environment
+.pixi/
+pixi.lock

@@ -3,42 +3,89 @@
 This repo is supposed to be a sandbox where I can experiment with different control/perception algorithms that can be used with a mobile base.
 I am using the [andino](https://github.com/Ekumen-OS/andino) robot as the mobile platform.
 
-## Docker instructions
+## Prerequisites
 
-Instructions for setting up the Docker container can be found/adapted from [here](https://github.com/bgill92/physics_sandbox?tab=readme-ov-file#dockerfile-information).
+This project uses [pixi](https://pixi.sh) for managing dependencies and the ROS2 environment. Pixi is a modern, fast package manager that simplifies environment management.
 
-## Launching the Gazebo Simulation
+### Installing pixi
 
-To run the Gazebo simulation:
+Install pixi by running:
 
-1) Make sure that the `andino` submodule is pulled:
+```bash
+curl -fsSL https://pixi.sh/install.sh | bash
+```
+
+After installation, restart your shell or run:
+
+```bash
+source ~/.bashrc  # or ~/.zshrc if using zsh
+```
+
+For more installation options, visit [pixi.sh](https://pixi.sh).
+
+## Setup
+
+1. Make sure that the `andino` submodule is pulled:
 ```bash
 git submodule update --init --recursive
 ```
 
-2) In a terminal, run:
+2. Install all dependencies with pixi:
 ```bash
-export UID=$(id -u) export GID=$(id -g); docker compose -f compose.dev.yml run development
+pixi install
 ```
 
-Make sure that you have build the Docker Container via the following command:
+This will create a `.pixi` directory with all ROS2 Humble packages, Gazebo Classic, and development tools.
+
+## Building the Workspace
+
+Build the ROS2 workspace:
+
 ```bash
-export UID=$(id -u); export GID=$(id -g); docker compose -f compose.dev.yml build
+pixi run build
 ```
 
-3) When in the Docker container, build the packages via:
+This command runs `colcon build --symlink-install` with the proper ROS2 environment activated.
+
+## Launching the Gazebo Simulation
+
+To run the robot in maze simulation:
+
 ```bash
-colcon build --symlink-install
+pixi run sim
 ```
 
-4) Source the workspace:
+This will launch the andino robot inside a maze using Gazebo Classic.
+
+## Additional Commands
+
+Run any ROS2 command in the pixi environment:
+
 ```bash
-source install/setup.bash
+pixi run ros2 topic list
+pixi run ros2 node list
 ```
 
-5) Run:
+Clean build artifacts:
+
 ```bash
-ros2 launch mobile_robot_algorithms robot_in_maze.launch.py
+pixi run clean
 ```
 
-This should launch the andino robot inside of a maze.
+Enter the pixi shell for interactive development:
+
+```bash
+pixi shell
+```
+
+Once in the shell, you can run any ROS2 commands directly without the `pixi run` prefix.
+
+## Migrating from Docker
+
+This project previously used Docker for environment management. The pixi-based workflow offers:
+- Faster startup times (no container overhead)
+- Simpler commands (no docker compose complexity)
+- Native performance (no virtualization layer)
+- Better integration with host tools (editors, debuggers, etc.)
+
+All the same ROS2 packages and tools are available through pixi.

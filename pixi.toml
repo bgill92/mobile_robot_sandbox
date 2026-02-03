@@ -1,0 +1,51 @@
+[project]
+name = "mobile_robot_sandbox"
+version = "0.1.0"
+description = "Mobile robot sandbox for experimenting with control and perception algorithms"
+authors = ["bilal.gill@picknik.ai"]
+channels = ["conda-forge", "robostack-staging"]
+platforms = ["linux-64"]
+
+[tasks]
+# Build the workspace with colcon
+build = "colcon build --symlink-install"
+
+# Clean build artifacts
+clean = "rm -rf build install log"
+
+# Launch the robot in maze simulation
+sim = "bash -c 'source install/setup.bash && ros2 launch mobile_robot_algorithms robot_in_maze.launch.py'"
+
+# Source workspace for interactive use
+source = "bash -c 'source install/setup.bash && exec bash'"
+
+[dependencies]
+# ROS2 Humble - using desktop for complete installation
+ros-humble-desktop = "*"
+
+# Gazebo Classic support
+ros-humble-gazebo-ros-pkgs = "*"
+
+# Build tools
+colcon-common-extensions = "*"
+
+# Development tools
+clang = "*"
+cmake = "*"
+git = "*"
+git-lfs = "*"
+neovim = "*"
+tmux = "*"
+vim = "*"
+gdb = "*"
+wget = "*"
+curl = "*"
+
+# Python and scientific packages
+python = "3.10.*"
+pip = "*"
+matplotlib = "*"
+scipy = "*"
+
+[activation.env]
+ROS_DOMAIN_ID = "0"
