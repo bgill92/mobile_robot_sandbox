@@ -43,6 +43,7 @@ ros-humble-joint-state-broadcaster = "*"
 # Additional ROS2 packages
 ros-humble-xacro = "*"
 ros-humble-robot-state-publisher = "*"
+ros-humble-rosbag2-storage-mcap = "*"
 
 # Build tools
 colcon-common-extensions = "*"
