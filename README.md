@@ -58,13 +58,77 @@ This command runs `colcon build --symlink-install` with the proper ROS2 environm
 
 ## Launching the Gazebo Simulation
 
-To run the robot in maze simulation:
+**⚠️ Known Limitation:** Gazebo Classic has a threading issue in conda/pixi environments that causes crashes. See [Hybrid Workflow](#hybrid-workflow-pixi--docker) below for the recommended approach.
+
+If you want to try running Gazebo with pixi (unstable):
 
 ```bash
 pixi run sim
 ```
 
-This will launch the andino robot inside a maze using Gazebo Classic.
+Note: This will likely crash with a `pthread_mutex_lock` error due to library threading conflicts between Gazebo Classic and conda packages. This is a known robostack limitation.
+
+## Hybrid Workflow (Pixi + Docker)
+
+**Recommended approach:** Use pixi for development and Docker for Gazebo simulation.
+
+### Development with Pixi (Fast, Native)
+
+Use pixi for all development work:
+
+```bash
+# Build the workspace
+pixi run build
+
+# Run ROS2 commands
+pixi run ros2 topic list
+pixi run ros2 node list
+
+# Interactive development
+pixi run source-zsh  # or 'source' for bash
+# Now you have full ROS2 environment with native performance
+```
+
+**Benefits:**
+- ✓ Fast builds (no Docker overhead)
+- ✓ Native performance
+- ✓ Direct IDE integration
+- ✓ Easy access to debugging tools
+
+### Gazebo Simulation with Docker (Stable)
+
+When you need to run Gazebo simulations, use Docker:
+
+```bash
+# Build the Docker image (first time only)
+export UID=$(id -u)
+export GID=$(id -g)
+docker compose -f compose.dev.yml build
+
+# Run Gazebo simulation
+docker compose -f compose.dev.yml run development
+```
+
+Inside the Docker container:
+```bash
+colcon build --symlink-install
+source install/setup.bash
+ros2 launch mobile_robot_algorithms robot_in_maze.launch.py
+```
+
+**Why Docker for Gazebo?**
+- Gazebo Classic has known threading issues in conda environments
+- Docker uses system-installed Gazebo which works reliably
+- Only needed when running full simulations, not for general development
+
+### Workflow Summary
+
+| Task | Use | Command |
+|------|-----|---------|
+| Building code | Pixi | `pixi run build` |
+| Running tests | Pixi | `pixi run bash -c 'source install/setup.bash && ...'` |
+| ROS2 development | Pixi | `pixi run source-zsh` |
+| Gazebo simulation | Docker | `docker compose -f compose.dev.yml run development` |
 
 ## Additional Commands
 
