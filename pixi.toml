@@ -15,6 +15,8 @@ build = "colcon build --symlink-install --cmake-args -DBUILD_TESTING=OFF"
 clean = "rm -rf build install log"
 
 # Launch the robot in maze simulation
+# Note: Gazebo Classic has threading issues in conda environments that cause crashes
+# This is a known limitation with no complete fix yet
 sim = "bash -c 'source install/setup.bash && ros2 launch mobile_robot_algorithms robot_in_maze.launch.py'"
 
 # Source workspace for interactive use (bash)
@@ -57,6 +59,9 @@ gdb = "*"
 wget = "*"
 curl = "*"
 
+# Pin TBB to older version for Gazebo compatibility
+tbb = "2021.*"
+
 # Python and scientific packages
 python = "*"
 pip = "*"
@@ -65,3 +70,7 @@ scipy = "*"
 
 [activation.env]
 ROS_DOMAIN_ID = "0"
+GAZEBO_MODEL_PATH = "$GAZEBO_MODEL_PATH:${PIXI_PROJECT_ROOT}/src/mobile_robot_algorithms/models"
+# Workaround for Gazebo threading issues with TBB
+OMP_NUM_THREADS = "1"
+OMP_WAIT_POLICY = "PASSIVE"
