@@ -2,6 +2,9 @@
 .colcon/log/*
 .colcon/build/*
 .colcon/install/*
+build/
+install/
+log/
 src/mobile_robot_algorithms/scripts/rosbag2_*
 src/mobile_robot_algorithms/scripts/__pycache__
 
