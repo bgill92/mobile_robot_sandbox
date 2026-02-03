@@ -7,8 +7,9 @@ channels = ["conda-forge", "robostack-staging"]
 platforms = ["linux-64"]
 
 [tasks]
-# Build the workspace with colcon (skip tests and hardware packages for simulation)
-build = "colcon build --symlink-install --cmake-args -DBUILD_TESTING=OFF --packages-skip andino_base andino_firmware andino_hardware"
+# Build the workspace with colcon (skip tests for simulation)
+# Hardware packages are ignored via COLCON_IGNORE files
+build = "colcon build --symlink-install --cmake-args -DBUILD_TESTING=OFF"
 
 # Clean build artifacts
 clean = "rm -rf build install log"
