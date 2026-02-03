@@ -37,6 +37,15 @@ pixi install
 
 This will create a `.pixi` directory with all ROS2 Humble packages, Gazebo Classic, and development tools.
 
+3. (First-time setup) Exclude hardware-specific packages for simulation:
+```bash
+touch src/andino/andino_base/COLCON_IGNORE
+touch src/andino/andino_firmware/COLCON_IGNORE
+touch src/andino/andino_hardware/COLCON_IGNORE
+```
+
+These packages require hardware-specific dependencies (like libserial) that aren't needed for Gazebo simulation.
+
 ## Building the Workspace
 
 Build the ROS2 workspace:
